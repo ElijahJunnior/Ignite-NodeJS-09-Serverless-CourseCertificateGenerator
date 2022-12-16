@@ -44,6 +44,33 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
     },
   },
+  resources: {  
+    Resources: {
+      dbCertificateUsers: {
+        Type: "AWS::DynamoDB::Table",
+        Properties: {
+          TableName: "users_certificate",
+          BillingMode: "PAY_PER_REQUEST",
+          // ProvisionedThroughput: {
+          //   ReadCapacityUnits: 2,
+          //   WriteCapacityUnits: 2
+          // },
+          AttributeDefinitions: [
+            {
+              AttributeName: "id",
+              AttributeType: "S"
+            }
+          ],
+          KeySchema: [
+            {
+              AttributeName: "id",
+              KeyType: "HASH"
+            }
+          ]
+        }
+      }
+    }
+  }
 };
 
 module.exports = serverlessConfiguration;
